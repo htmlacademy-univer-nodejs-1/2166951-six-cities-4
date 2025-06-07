@@ -49,7 +49,7 @@ export class OfferRdo {
   @Expose()
   public amenities: Amenity[];
 
-  @Expose()
+  @Expose({ name: 'userId' })
   @Type(() => UserRdo)
   public owner: UserRdo;
 

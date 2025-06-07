@@ -105,6 +105,7 @@ export class DefaultOfferService implements OfferService {
       .find({ city, isPremium: true })
       .limit(DEFAULT_PREMIUM_OFFER_COUNT)
       .sort({ createdAt: DEFAULT_SORT_TYPE })
+      .populate('userId')
       .exec();
 
     return this.getWithFavorites(offers, userId);

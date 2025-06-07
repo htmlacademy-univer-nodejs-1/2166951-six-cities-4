@@ -9,7 +9,7 @@ export const generateRandomValue = (
 export const getRandomItems = <T>(items: T[]): T[] => {
   const startPosition = generateRandomValue(0, items.length - 1);
   const endPosition =
-    startPosition + generateRandomValue(startPosition, items.length);
+    startPosition + generateRandomValue(startPosition + 1, items.length);
   return items.slice(startPosition, endPosition);
 };
 

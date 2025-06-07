@@ -45,6 +45,13 @@ export class OfferController extends BaseController {
     });
 
     this.addRoute({
+      path: '/favorites',
+      method: HttpMethod.Get,
+      handler: this.getFavorites,
+      middlewares: [new PrivateRouteMiddleware()],
+    });
+
+    this.addRoute({
       path: '/:offerId',
       method: HttpMethod.Get,
       handler: this.getOne,
@@ -93,13 +100,6 @@ export class OfferController extends BaseController {
       path: '/premium/:city',
       method: HttpMethod.Get,
       handler: this.getPremium,
-    });
-
-    this.addRoute({
-      path: '/favorites',
-      method: HttpMethod.Get,
-      handler: this.getFavorites,
-      middlewares: [new PrivateRouteMiddleware()],
     });
 
     this.addRoute({
@@ -193,7 +193,7 @@ export class OfferController extends BaseController {
   ) {
     const offers = await this.offerService.findPremiumOffersByCity(
       city as City,
-      tokenPayload.id
+      tokenPayload?.id
     );
 
     this.ok(res, fillDTO(OfferRdo, offers));

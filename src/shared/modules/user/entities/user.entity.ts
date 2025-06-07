@@ -23,7 +23,7 @@ export class UserEntity implements User {
   @prop({ type: String, required: false, default: '' })
   public avatarPath: string;
 
-  @prop({ type: String, required: true, default: '' })
+  @prop({ type: String, required: false, default: '' })
   public password?: string;
 
   @prop({ type: String, enum: UserType, required: true })

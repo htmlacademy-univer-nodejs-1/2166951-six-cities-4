@@ -76,6 +76,9 @@ paths:
                   token:
                     type: string
                     example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+                  email:
+                    type: string
+                    example: keks@htmlacademy.ru
         '401':
           description: Неверный логин или пароль.
         '404':
@@ -346,6 +349,33 @@ paths:
         '404':
           description: Предложение не найдено
 
+  /offers/{offerId}/comments:
+    get:
+      tags:
+        - comments
+      summary: Список комментариев для предложения
+      description: Предоставляет список комментариев к предложению. Сервис всегда возвращает список из 50 (или меньше) последних комментариев.
+      parameters:
+        - name: offerId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: 6329c3d6a04ab1061c6425eo
+          description: Идентификатор предложения, для которого запрашиваются комментарии
+
+      responses:
+        '200':
+          description: Список комментариев
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/comment'
+        '404':
+          description: Предложение не найдено
+
   /comments:
     post:
       tags:
@@ -375,33 +405,6 @@ paths:
         '404':
           description: Предложение не найдено
 
-  /comments/{offerId}:
-    get:
-      tags:
-        - comments
-      summary: Список комментариев для предложения
-      description: Предоставляет список комментариев к предложению. Сервис всегда возвращает список из 50 (или меньше) последних комментариев.
-      parameters:
-        - name: offerId
-          in: path
-          required: true
-          schema:
-            type: string
-            example: 6329c3d6a04ab1061c6425eo
-          description: Идентификатор предложения, для которого запрашиваются комментарии
-
-      responses:
-        '200':
-          description: Список комментариев
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/comment'
-        '404':
-          description: Предложение не найдено
-
 components:
   schemas:
     createUser:
@@ -411,10 +414,6 @@ components:
         email:
           type: string
           example: keks@htmlacademy.ru
-
-        avatarPath:
-          type: string
-          example: image.jpg
 
         name:
           type: string
@@ -440,10 +439,6 @@ components:
         email:
           type: string
           example: keks@htmlacademy.ru
-
-        avatarPath:
-          type: string
-          example: image.jpg
 
         name:
           type: string
@@ -656,16 +651,11 @@ components:
           minLength: 5
           maxLength: 1024
 
-        postDate:
-          type: string
-          format: date
-          example: 2025-02-12
-
         rating:
           type: number
           example: 3.8
 
-        author:
+        offerId:
           type: string
           example: 6329c3d6a04ab1061c6425ea
 
@@ -692,11 +682,7 @@ components:
           type: number
           example: 4.5
 
-        author:
-          type: string
-          example: 6329c3d6a04ab1061c6425ea
-
-        offer:
+        owner:
           type: string
           example: 6329c3d6a04ab1061c6425ea
 

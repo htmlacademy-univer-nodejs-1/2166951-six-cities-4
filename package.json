@@ -15,10 +15,9 @@
     "lint": "eslint src/ --ext .ts",
     "compile": "tsc -p tsconfig.json",
     "clean": "rimraf dist",
-    "ts": "ts-node",
     "tsx": "tsx",
     "mock:server": "json-server ./mocks/mock-server-data.json --port 3123",
-    "docker:up:dev": "docker compose -f .\\docker-compose.dev.yml up -d"
+    "docker:up": "docker compose up -d"
   },
   "devDependencies": {
     "@types/convict": "^6.1.6",
